@@ -1,4 +1,11 @@
-FROM ubuntu:14.04
+FROM phusion/baseimage:0.9.17
+#FROM ubuntu:14.04
+
+# Use baseimage-docker's init system
+CMD ["/sbin/my_init"]
+
+# Put your own build instructions here...
+
 
 MAINTAINER Allan Costa <allaninocencio@yahoo.com.br>
 
@@ -67,3 +74,7 @@ WORKDIR /usr/local/src/nupic
 RUN python setup.py install
 
 WORKDIR /home/docker
+
+# Clean up APT when done
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
